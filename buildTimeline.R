@@ -3,19 +3,23 @@ library(ggplot2)
 
 buildTimeline = function(quakeData,minYear,maxYear,countryList) {
   quakesFiltered <- filterQuakes( quakeData,minYear,maxYear,countryList)
-  ggplot(quakesFiltered,aes(x = YEAR,y = COUNTRY,
+  ggplot(quakesFiltered,aes(x = YEAR,
+                            #y = COUNTRY,
+                            y = 1,
          xmin = minYear,xmax = maxYear,name = LOCATION_NAME,
-          #size = EQ_PRIMARY 
+           
          )) +
-  geom_timeline()
+  geom_timeline(aes(size = EQ_PRIMARY))
 
    
 }
+#need to get rid of the NA in size
 filterQuakes = function(quakeData,minYear,maxYear,countryList) {
   filter(quakeData,YEAR >= minYear,
                    YEAR <= maxYear,
-                    COUNTRY %in% countryList) %>%
-                 mutate(COUNTRY = factor(COUNTRY))
+                    COUNTRY %in% countryList
+                    ) %>%
+                 mutate(COUNTRY = factor(COUNTRY),EQ_PRIMARY = factor(EQ_PRIMARY) )
 }
 
 
