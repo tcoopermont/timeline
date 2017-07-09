@@ -7,6 +7,8 @@ skdf <- data.frame(x = c(1988,1989,1990,1995,2000,2005,2011,2014,2015),
                    )
 
 library(scales)
+library(ggplot2)
+library(grid)
 #draw_panel_function_bak <- function(data, panel_scales, coord) {
 #        coords <- coord$transform(data, panel_scales) %>%
 #                mutate(lower = rescale(lower, from = panel_scales$y.range),
@@ -30,6 +32,8 @@ library(scales)
 draw_panel_function <- function(data, panel_scales, coord) {
          str(data)
          str(panel_scales)
+         #try and filter the data by min/max year
+         # pull out the top n_max by magnitude - for annotation
          coords <- coord$data
          coords <- coord$transform(data, panel_scales) #%>%
                 #mutate(xmin = rescale(xmin, from = panel_scales$x.range),
