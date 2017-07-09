@@ -1,0 +1,45 @@
+my_circle <- circleGrob(name = "my_circle", x = 0.5, y = 0.5, r = 0.5, gp = gpar(col = "gray", lty = 3))
+grid.draw(my_circle)
+
+my_circle <- circleGrob(x = 0, y = 0, r = 5, gp = gpar(col = "gray")) 
+
+#working
+ my_circle <- circleGrob( x = 0.5, y = 0.5, r = 0.5)
+ grid.draw(my_circle)
+ ll <- pointsGrob(x= 0.5,y=0.5,default.units = "npc")
+ grid.draw(ll)
+
+ sg <- segmentsGrob(x0=0.5,y0=0.5,x1=0.8,y1=0.8)
+ grid.draw(sg)
+
+?element_line
+?theme
+base + theme(axis.ticks = element_blank(),
+                   axis.text.y = element_blank(),
+                   axis.title.y = element_blank())
+
+
+years = c(2000,2002,2003,2008)
+ric <- c(2,2,4,3)
+country <- c('usa','china','usa','china')
+dfy <- data.frame(years,ric,country)
+
+
+ggplot(dfy,aes(years,country)) + geom_point(aes(size = ric)) + scale_y_discrete("country")
+ggplot(dfy,aes(years,country)) + geom_point(aes(size = ric)) + scale_y_discrete("country",limits = country)
+
+
+ggplot(dfy,aes(years,country)) + geom_point(aes(size = ric)) + scale_y_discrete("country",limits = country) + theme(axis.title.y = element_blank(),panel.grid.major=element_blank(),panel.background = element_rect(fill = "white"),axis.line.x = element_line(),axis.ticks.y = element_blank())
+
+
+> ggplot(dfy,aes(years,country)) + geom_point(aes(size = ric)) + geom_segment(data=vertdf,aes(x=x,y=y,xend=xend,yend=yend)) + geom_text(aes(x=2000,y=1.2,label="montana",hjust="left",angle=45))+ scale_y_discrete("country",limits = country) + theme(axis.title.y = element_blank(),panel.grid.major=element_blank(),panel.background = element_rect(fill = "white"),axis.line.x = element_line(),axis.ticks.y = element_blank())
+
+
+xs <- c(0,0.5,1)
+ys <- c(0.5,0.5,0.5)
+pts <- pointsGrob(xs,ys,default.units = "npc",pch=19)
+ grid.draw(pts)
+ls <- segmentsGrob(0.5,0.5,0.5,0.7)
+ grid.draw(ls)
+ms <- textGrob("hello",0.5,0.7,just="left",rot=45)
+ grid.draw(ms)
