@@ -1,10 +1,3 @@
-skdf <- data.frame(x = c(1988,1989,1990,1995,2000,2005,2011,2014,2015),
-                   y=c(1,1,1,2,1,1,2,2,1),
-                   rict = c(5,6,8,2,4,3,5,6,4),
-                   name = c("Fox Island","Southereastern","Aleutian Islands",
-                            "Rat Islands","Fairbanks","Big Chain Mts.","Black Forest",
-                             "Yellowstone","Mt Rainier")
-                   )
 
 library(scales)
 library(ggplot2)
@@ -42,6 +35,7 @@ draw_panel_function <- function(data, panel_scales, coord) {
          datePoint = pointsGrob(x = coords$x,
                                 y = coords$y,
                                 pch = 19, size = unit(1,"char"),
+#need to change this to defaults
 gp = gpar(col = alpha(coords$colour, coords$alpha), fill = alpha(coords$fill, 
             coords$alpha), fontsize = coords$size * .pt  , 
                            lwd = coords$lwd)
@@ -52,13 +46,14 @@ gp = gpar(col = alpha(coords$colour, coords$alpha), fill = alpha(coords$fill,
                                  coords$y,
                                  coords$xmax,
                                  coords$y)
+         #should the length come in as a parameter?
          connLine = segmentsGrob(coords$x,coords$y,coords$x,coords$y + 0.07)
          labelTxt = textGrob(coords$name,coords$x,coords$y + 0.07,just="left",rot=45)
          #timeLine = segmentsGrob(0.25,0.5,0.8,0.5)
          gTree(children = gList(datePoint,timeLine,connLine,labelTxt))
          #timeLine 
 }
-
+#need to fix stroke
 GeomTimeline <- ggproto("GeomTimeline", Geom,
                          required_aes = c("x","y","name"),
                          default_aes = aes(shape = 19, lwd = 2,colour = "black",
