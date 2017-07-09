@@ -9,7 +9,7 @@ eq_clean_data <- function(adf) {
 
 eq_location_clean <- function(adf) {
   mutate(adf,LOCATION_NAME = toTitleCase(tolower(
-             sub("^[^:]+:\\s+" ,"",LOCATION_NAME,perl = TRUE))))
+             sub("^.+:\\s+" ,"",LOCATION_NAME,perl = TRUE))))
 
 }
 #eqd1 <- mutate(eqd, LATITUDE =  as.numeric(LATITUDE),LONGITUDE = as.numeric(LONGITUDE))
